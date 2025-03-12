@@ -3,6 +3,9 @@
 {% block content %}
 <h1>Hello There</h1>
 
+<img src="/img/Profile.jpeg" alt="Text"/>
+
+
 <form method='POST' action="{{url_for('index')}}">
   <input type="text" name="username" placeholder="Username">
   <input type="text" name="password" placeholder="Password">
@@ -49,7 +52,7 @@
         console.error('Error:',error)
       });
   })
-</script>
+</script> 
 
-{% endblock  %}
   
+{% endblock  %}

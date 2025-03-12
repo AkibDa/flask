@@ -3,10 +3,11 @@ import pandas as pd
 import os
 import uuid
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='templates', static_folder='static', static_url_path='/')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
+  
   if request.method == 'GET':
     return render_template('index.html')
   elif request.method == 'POST':
@@ -17,7 +18,7 @@ def index():
     if username == '18700124016' and password == 'skakibahammed':
       return "Success"
     else:
-      return "Failure"
+      return render_template('index.html')
     
 @app.route('/file_upload', methods=['POST'])
 def file_upload():
