@@ -2,7 +2,12 @@
 
 {% block content %}
 <h1>Hello There</h1>
-  <p>{{myresult}}</p>
-  <p>{{myvalue}}</p>
+
+<form method='POST' action="{{url_for('index')}}">
+  <input type="text" name="username" placeholder="Username">
+  <input type="text" name="password" placeholder="Password">
+  <input type="submit" value='Login'>
+</form>
+
 {% endblock  %}
   

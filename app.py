@@ -1,12 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__, template_folder='templates')
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-  myvalue = 'Yo bro'
-  myresult = 10 + 20
-  return render_template('index.html', myresult=myresult, myvalue=myvalue)
+  if request.method == 'GET':
+    return render_template('index.html')
+  elif request.method == 'POST':
+    username = request.form.get['username']
+    password = request.form.get['password']
+    
+    if username == '18700124016' and password == 'skakibahammed':
+      return "Success"
+    else:
+      return "Failure"
 
 @app.route('/greet/<name>')
 def nam(name):
