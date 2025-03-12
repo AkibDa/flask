@@ -7,13 +7,23 @@ def index():
   if request.method == 'GET':
     return render_template('index.html')
   elif request.method == 'POST':
-    username = request.form.get['username']
-    password = request.form.get['password']
+    if 'some key' in request.form.keys():
+      username = request.form['username']
+      password = request.form['password']
     
     if username == '18700124016' and password == 'skakibahammed':
       return "Success"
     else:
       return "Failure"
+    
+@app.route('/file_upload', methods=['POST'])
+def file_upload():
+  file = request.files['file']
+  
+  if file.content_type == 'text/plain':
+    return file.read().decode()
+  else:
+    return "Please give a '.txt' file"
 
 @app.route('/greet/<name>')
 def nam(name):
