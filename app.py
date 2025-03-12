@@ -1,10 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 @app.route('/')
 def index():
-  return "Hello World"
+  myvalue = 'Yo bro'
+  myresult = 10 + 20
+  return render_template('index.html', myresult=myresult, myvalue=myvalue)
 
 @app.route('/greet/<name>')
 def nam(name):
