@@ -2,4 +2,9 @@
 
 {% block content %}
   <h1>  What's up with ya?  </h1>
+  <p>  {{message}}  </p>
+
+  <a href="{{url_for('set_data')}}">Set session data</a><br>
+  <a href="{{url_for('get_data')}}">Get session data</a><br>
+  <a href="{{url_for('clear_session')}}">Clear session data</a><br>
 {% endblock content %}
