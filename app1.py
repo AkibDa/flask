@@ -17,8 +17,6 @@ def index():
     
     if username == '18700124016' and password == 'skakibahammed':
       return "Success"
-    else:
-      return render_template('index.html')
     
 @app.route('/file_upload', methods=['POST'])
 def file_upload():
