@@ -1,23 +1,28 @@
-from flask import Flask, render_template, request
-
+from flask import render_template, request, redirect, url_for
 from models import Person
+from app import db
 
 def register_routes(app, db):
-  
-  @app.route('/', methods=['GET', 'POST'])
-  def index():
-      if request.method == 'GET':
-        people = Person.query.all()
-        return render_template('index.html', people=people)
-      elif request.method == 'POST':
-        name = request.form.get('name')
-        age = int(request.form.get('age'))
-        job = request.form.get('job')
-        
-        person = Person(name=name, age=age, job=job)
-        
-        db.session.add(person)
-        db.session.commit()
-        
+    @app.route('/', methods=['GET', 'POST'])
+    def index():
+        if request.method == 'POST':
+            name = request.form.get('name')
+            age = request.form.get('age')
+            job = request.form.get('job')
+
+            if not name or not age or not job:
+                return "All fields are required!", 400
+
+            try:
+                age = int(age)
+            except ValueError:
+                return "Age must be a number!", 400  
+
+            person = Person(name=name, age=age, job=job)
+            db.session.add(person)
+            db.session.commit()
+
+            return redirect(url_for('index'))  # Redirect to avoid resubmission
+
         people = Person.query.all()
         return render_template('index.html', people=people)
