@@ -1,8 +1,9 @@
 from flask import render_template, request, redirect, url_for
-from models import Person
+from flask_login import login_user, logout_user, current_user, login_required
+from models import User
 from app import db
 
-def register_routes(app, db):
+# def register_routes(app, db):
     # @app.route('/', methods=['GET', 'POST'])
     # def index():
     #     if request.method == 'POST':
@@ -40,3 +41,27 @@ def register_routes(app, db):
     # def details(pid):
     #     person = Person.query.filter(Person.pid == pid).first()
     #     return render_template('details.html', person=person)
+    
+def register_routes(app, db, bcrypt):
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+    
+    @app.route('/signup', methods=['GET', 'POST'])
+    def signup():
+        if request.method == 'GET':
+            return render_template('signup.html')
+        elif request.method == 'POST':
+            pass
+    
+    @app.route('/login/<uid>', methods=['GET', 'POST'])
+    def login(uid):
+        if request.method == 'GET':
+            return render_template('login.html')
+        elif request.method == 'POST':
+            pass
+    
+    @app.route('/logout/<uid>')
+    def logout(uid):
+        logout_user(uid)
+        return 'Success'
