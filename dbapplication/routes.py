@@ -52,16 +52,43 @@ def register_routes(app, db, bcrypt):
         if request.method == 'GET':
             return render_template('signup.html')
         elif request.method == 'POST':
-            pass
+            username = request.form.get('username')
+            password = request.form.get('password')
+            
+            hashed_password = bcrypt.generate_password_hash(password)
+            
+            user = User(username=username, password=hashed_password)
+            
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for('index'))
     
-    @app.route('/login/<uid>', methods=['GET', 'POST'])
-    def login(uid):
+    @app.route('/login', methods=['GET', 'POST'])
+    def login():
         if request.method == 'GET':
             return render_template('login.html')
         elif request.method == 'POST':
-            pass
+            username = request.form.get('username')
+            password = request.form.get('password')
+            
+            user = User.query.filter(User.username == username).first()
+            
+            if bcrypt.check_password_hash(user.password, password):
+                login_user(user)
+                return redirect(url_for('index'))
+            else:
+                return 'Failed'
+            
+             
+    @app.route('/logout')
+    def logout():
+        logout_user()
+        return redirect(url_for('index'))
     
-    @app.route('/logout/<uid>')
-    def logout(uid):
-        logout_user(uid)
-        return 'Success'
+    @app.route('/secret')
+    @login_required
+    def secret():
+        if current_user.role == 'admin':
+            return 'My secret message!'
+        else:
+            return 'No permission'
