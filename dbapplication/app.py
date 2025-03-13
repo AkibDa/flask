@@ -10,7 +10,8 @@ def create_app():
   
   db.init_app(app)
   
-  #imports later on
+  from routes import register_routes
+  register_routes(app, db)
   
   migrate = Migrate(app, db)
   
