@@ -12,4 +12,4 @@ class Todo(db.Model):
     return f"<TODO {self.title}, Done: {self.done}>"
   
   def get_id(self):
-    return self.id
+    return self.tid

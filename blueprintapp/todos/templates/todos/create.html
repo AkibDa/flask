@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Create Todo</h1>
+  <form action="{{url_for('todos.create')}}" method='POST'>
+    <input type="text" name="title" placeholder="Tile" required='required'>
+    <input type="text" name="description" placeholder="Descrption">
+    <input type="checkbox" name="done"> Done
+    <input type="submit" value='Create'>
+  </form>
+{% endblock %}
