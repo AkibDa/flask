@@ -17,7 +17,7 @@ def create():
   elif request.method == 'POST':
     name = request.form.get('name')
     age = int(request.form.get('age'))
-    job = job
+    job = request.form.get('job')
     
     job = job if job != '' else None
     
