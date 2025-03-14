@@ -19,7 +19,7 @@ def create():
     age = int(request.form.get('age'))
     job = job
     
-    description = job if job != '' else None
+    job = job if job != '' else None
     
     person = Person(name=name, age=age, job=job)
     

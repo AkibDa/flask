@@ -10,9 +10,9 @@ def create_app():
   
   db.init_app(app)
   
-  from blueprintapp.blueprints.core.routes import core
-  from blueprintapp.blueprints.todos.routes import todos
-  from blueprintapp.blueprints.people.routes import people  
+  from .blueprints.core.routes import core
+  from .blueprints.todos.routes import todos
+  from .blueprints.people.routes import people
   
   app.register_blueprint(core, url_prefix='/')
   app.register_blueprint(todos, url_prefix='/todos')
